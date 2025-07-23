@@ -14,7 +14,7 @@ TEST_CASE("Test Degas2 Physics Functions"){
 
   {
     int numParticles = 10000;
-	double energy = 1000.0;
+	double energy = 3.0;
 
     Kokkos::View<Omega_h::Real ***> sigma_t_;            // mat, T, g
     Kokkos::View<Omega_h::Real ***> sigma_a_;            // mat, T, g
