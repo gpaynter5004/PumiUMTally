@@ -175,7 +175,9 @@ public:
 
         bool rejection_test = false;
         auto old_mag_v = Kokkos::sqrt(2*particle_energy(particle_info.particle_index)/mp);
-
+        double vx;
+        double vy;
+        double vz;
         //Loops this until it passes the rejection test
         while (!rejection_test) {
           //Generate random numbers for the velocity
@@ -185,9 +187,9 @@ public:
           double y2 = rand_gen.drand(0., 1.);
 
           //Sample a new velocity from the thermal distribution (cm/s)
-          auto vx = Kokkos::sqrt(field_info.ion_temperature/mp)*Kokkos::sqrt(-2 * Kokkos::log(x1))*Kokkos::cos(2*M_PI*x2);
-          auto vy = Kokkos::sqrt(field_info.ion_temperature/mp)*Kokkos::sqrt(-2 * Kokkos::log(x1))*Kokkos::sin(2*M_PI*x2);
-          auto vz = Kokkos::sqrt(field_info.ion_temperature/mp)*Kokkos::sqrt(-2 * Kokkos::log(y1))*Kokkos::sin(2*M_PI*y2);
+          vx = Kokkos::sqrt(field_info.ion_temperature/mp)*Kokkos::sqrt(-2 * Kokkos::log(x1))*Kokkos::cos(2*M_PI*x2);
+          vy = Kokkos::sqrt(field_info.ion_temperature/mp)*Kokkos::sqrt(-2 * Kokkos::log(x1))*Kokkos::sin(2*M_PI*x2);
+          vz = Kokkos::sqrt(field_info.ion_temperature/mp)*Kokkos::sqrt(-2 * Kokkos::log(y1))*Kokkos::sin(2*M_PI*y2);
 
           //Compute the relative velocity
           auto rel_vx = vx - particle_info.direction[0]*old_mag_v;
