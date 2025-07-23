@@ -133,7 +133,7 @@ public:
 	return sigma_cx;
   }
   KOKKOS_FUNCTION //IF THIS IS CHANGED MAY NEED TO CHANGE max_sigma_cx in the collision code
-  double analytic_cross_section_CE(double energy) {
+  double analytic_cross_section_CE(double energy) const{
     return (0.6937e-14*(1-0.155*Kokkos::log10(energy))*(1-0.155*Kokkos::log10(energy)))/(1+0.1112e-14*Kokkos::pow(energy,3.3));
   }
 
@@ -174,7 +174,7 @@ public:
 	 double mp {938.27e6/(3e10*3e10)}; //eV/c^2 = eV*s^2/cm^2
 
         bool rejection_test = false;
-        auto old_mag_v = Kokkos::sqrt(2*particle_energy(particle_info.particle_index)/mp)
+        auto old_mag_v = Kokkos::sqrt(2*particle_energy(particle_info.particle_index)/mp);
 
         //Loops this until it passes the rejection test
         while (!rejection_test) {
@@ -202,7 +202,7 @@ public:
         }
 
         //Now that the rejection test has passed, set the new information
-        double mag_v = Kokkos::sqrt(vx*vx+vy*vy+vz*vz);
+        double mag_v{Kokkos::sqrt(vx*vx+vy*vy+vz*vz)};
 	particle_info.direction[0] = vx/mag_v;
 	particle_info.direction[1] = vy/mag_v;
 	particle_info.direction[2] = vz/mag_v;
