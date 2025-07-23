@@ -9,12 +9,11 @@
 #include <Kokkos_Core.hpp>
 #include <fstream>
 #include <catch2/matchers/catch_matchers_floating_point.hpp>
-/*
 TEST_CASE("Test Degas2 Physics Functions"){
   Kokkos::initialize();
 
   {
-    int numParticles = 1000;
+    int numParticles = 10000;
 	double energy = 3.0;
 
     Kokkos::View<Omega_h::Real ***> sigma_t_;            // mat, T, g
@@ -60,7 +59,7 @@ TEST_CASE("Test Degas2 Physics Functions"){
         });
 	auto output = create_mirror_view(particles);
 	Kokkos::deep_copy(output, particles);
-	//std::ofstream outfile("Log.txt");
+	std::ofstream outfile("Log.txt");
 
 	//These 4 functions should return the commented value for SEED=12345
 
@@ -69,7 +68,7 @@ TEST_CASE("Test Degas2 Physics Functions"){
 		l += output(i).position[0];
 	}
 	l /= numParticles;
-	//outfile << "Average Distance (cm): " << l << std::endl; //2.41
+	outfile << "Average Distance (cm): " << l << std::endl; //2.41
 
 	double varl {0};
 	for (int i=0; i < numParticles; ++i) {
@@ -77,14 +76,14 @@ TEST_CASE("Test Degas2 Physics Functions"){
 	}
 	varl /= (numParticles - 1);
 	double sdl {sqrt(varl)};
-	//outfile << "Standard Deviation of Distance (cm): " << sdl << std::endl; //2.38
+	outfile << "Standard Deviation of Distance (cm): " << sdl << std::endl; //2.38
 
 	double ux {0};
 	for (int i=0; i < numParticles; ++i) {
 		ux += output(i).direction[0];
 	}
 	ux /= numParticles;
-	//outfile << "Mean x Direction: " << ux << std::endl; //0.0159
+	outfile << "Mean x Direction: " << ux << std::endl; //0.0159
 
 	double varux;
 	for (int i=0; i < numParticles; ++i) {
@@ -92,8 +91,6 @@ TEST_CASE("Test Degas2 Physics Functions"){
 	}
 	varux /= (numParticles - 1);
 	double sdux {sqrt(varux)};
-
-	/*
 	outfile << "Standard Deviation of Mean x Direction: " << sdux << std::endl; //0.579
 
 
@@ -119,7 +116,7 @@ TEST_CASE("Test Degas2 Physics Functions"){
   Kokkos::finalize();
 
 }
-*/
+/*
 TEST_CASE("Test Degas2 Physics Particle Track Until Destroyed"){
   Kokkos::initialize();
 
@@ -209,4 +206,4 @@ TEST_CASE("Test Degas2 Physics Particle Track Until Destroyed"){
   }
   Kokkos::finalize();
 
-}
+}*/
